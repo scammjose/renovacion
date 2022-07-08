@@ -72,6 +72,11 @@ https://templatemo.com/tm-551-stand-blog
           <div class="row d-flex justify-content-center">
             <div class="col-lg-8">
             <h1 class="fw-bold mb-5">¡Bienvenido profesor!</h1>
+            <div class="form-outline">
+              @foreach ($data as $item)
+              <p>{{$item->title}}</p>
+              @endforeach
+            </div>
             <h6>Recuerda que tienes derecho a 2 renovaciones por dia.</h6>
 
               <!-- Equipos -->
@@ -113,11 +118,11 @@ https://templatemo.com/tm-551-stand-blog
           </div>
           <div class="modal-body">
             <div class="col-md-8 mb-4">
-              <div class="form-outline">
+              {{-- <div class="form-outline">
                 @foreach ($data as $item)
                 <p>{{$item->title}}</p>
                 @endforeach
-              </div>
+              </div> --}}
             </div>
             <div class="col-md-4 mb-4">
               <div class="form-outline">

@@ -85,20 +85,22 @@ https://templatemo.com/tm-551-stand-blog
             <h2>Por favor ingresa tu matricula y equipo(s) para renovar</h2>
             <h6>Recuerda que tienes derecho a 2 renovaciones por dia.</h6>
               <!-- 2 column grid layout with text inputs for the first and last names -->
-              <div class="row">
-                <div class="col-md-8 mb-4">
-                  <div class="form-outline">
-                    <input class="form-control" name="matricula" type="text" id="matricula" placeholder="Matricula" required=""/>
+              <form action="{{route('mostrar')}}" method="GET">
+                <div class="row">
+                  <div class="col-md-8 mb-4">
+                    <div class="form-outline">
+                      <input class="form-control" name="matricula" type="text" id="matricula" placeholder="Matricula" required=""/>
+                    </div>
+                  </div>
+                  <div class="col-md-4 mb-4">
+                    <div class="form-outline">
+                      <button onclick="" type="submit" class="btn btn-primary btn-block mb-4" id="form-matricula">
+                        Buscar
+                      </button>
+                    </div>
                   </div>
                 </div>
-                <div class="col-md-4 mb-4">
-                  <div class="form-outline">
-                    <button onclick="" type="submit" class="btn btn-primary btn-block mb-4" id="form-matricula">
-                      Buscar
-                    </button>
-                  </div>
-                </div>
-              </div>
+              </form>
 
               <!-- Equipos -->
               <h2>Duración de renovacion</h2>
@@ -220,39 +222,39 @@ https://templatemo.com/tm-551-stand-blog
         });
         return false;
       }
-      else{
-        $.ajax({
-          url: "{{ route('busqueda') }}",
-          type: "POST",
-          data: {
-            _token: "{{ csrf_token() }}",
-            matricula: $('#matricula').val(),
-          },
-          success: function(data){
-            //console.log(data);
-            var data = JSON.parse(data);
-            if(data == "False"){
-              Swal.fire({
-                icon: 'error',
-                type: 'error',
-                title: 'Oops...',
-                text: 'La matricula no fue encontrada',
-              }).then((result) => {
-                if (result.value) {
-                  document.getElementById("form-submit").disabled = false;
-                }
-              })
-            }
-            else{
-              //$('#modalAgregar').modal('show');
-              console.log(data);
-              var matricula=$('#matricula').val();
-              console.log(matricula);
-              window.location.href="{{ route('mostrar',"matricula") }}";
-            }
-          }
-        });
-      }
+      // else{
+      //   $.ajax({
+      //     url: "{{ route('busqueda') }}",
+      //     type: "POST",
+      //     data: {
+      //       _token: "{{ csrf_token() }}",
+      //       matricula: $('#matricula').val(),
+      //     },
+      //     success: function(data){
+      //       //console.log(data);
+      //       var data = JSON.parse(data);
+      //       if(data == "False"){
+      //         Swal.fire({
+      //           icon: 'error',
+      //           type: 'error',
+      //           title: 'Oops...',
+      //           text: 'La matricula no fue encontrada',
+      //         }).then((result) => {
+      //           if (result.value) {
+      //             document.getElementById("form-submit").disabled = false;
+      //           }
+      //         })
+      //       }
+      //       else{
+      //         //$('#modalAgregar').modal('show');
+      //         console.log(data);
+      //         var matricula=$('#matricula').val();
+      //         console.log(matricula);
+      //         window.location.href="{{ route('mostrar',"matricula") }}";
+      //       }
+      //     }
+      //   });
+      // }
     });
 
     </script>
