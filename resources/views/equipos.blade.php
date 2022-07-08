@@ -71,14 +71,6 @@ https://templatemo.com/tm-551-stand-blog
 
           <div class="row d-flex justify-content-center">
             <div class="col-lg-8">
-            <h1 class="fw-bold mb-5">¡Bienvenido profesor!</h1>
-            <div class="form-outline">
-              @foreach ($data as $item)
-              <p>{{$item->title}}</p>
-              @endforeach
-            </div>
-            <h6>Recuerda que tienes derecho a 2 renovaciones por dia.</h6>
-
               <!-- Equipos -->
               <h2>Duración de renovacion</h2>
               <br>Por favor elija las horas que quiera que dure su renovacion</br>
@@ -91,16 +83,14 @@ https://templatemo.com/tm-551-stand-blog
             </div>
             <div class="form-check">
               <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-              <label class="form-check-label" for="flexRadioDefault2">
-                3 horas
-              </label>
+              <label class="form-check-label" for="flexRadioDefault2">3 horas</label>
             </div>
-
               <!-- Boton de Renovación -->
-              <button onclick="registrarse()" type="submit" class="btn btn-primary btn-block mb-4" id="registro" style="padding: 1.000rem 0.75rem;">
-                  Renovación
-              </button>
-
+              @if($data->status=1)
+              <button onclick="registrarse()" type="submit" class="btn btn-primary btn-block mb-4" id="registro" style="padding: 1.000rem 0.75rem;">Renovación</button>
+              @else
+              <button onclick="registrarse()" type="submit" class="btn btn-primary btn-block mb-4" id="registro" style="padding: 1.000rem 0.75rem;" disabled>Renovación</button>
+              @endif
             </div>
           </div>
         </div>
@@ -112,17 +102,23 @@ https://templatemo.com/tm-551-stand-blog
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
+            @if($data->status=1)
             <h5 class="modal-title" id="exampleModalToggleLabel">Tus equipos son:</h5>
             {{-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> --}}
             <span style="cursor: pointer" class="material-symbols-outlined" data-dismiss="modal">close</span>
+            @else
+            <h5 class="modal-title" id="exampleModalToggleLabel">No tienes equipos</h5>
+            {{-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> --}}
+            <span style="cursor: pointer" class="material-symbols-outlined" data-dismiss="modal">close</span>
+            @endif
           </div>
           <div class="modal-body">
             <div class="col-md-8 mb-4">
-              {{-- <div class="form-outline">
+              <div class="form-outline">
                 @foreach ($data as $item)
                 <p>{{$item->title}}</p>
                 @endforeach
-              </div> --}}
+              </div>
             </div>
             <div class="col-md-4 mb-4">
               <div class="form-outline">
@@ -154,3 +150,9 @@ https://templatemo.com/tm-551-stand-blog
     <script src="assets/js/isotope.js"></script>
     <script src="assets/js/accordions.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+    $( document ).ready(function() {
+      $('#modalAgregar').modal('toggle')
+    });
+    </script>

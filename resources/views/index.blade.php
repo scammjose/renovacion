@@ -81,10 +81,11 @@ https://templatemo.com/tm-551-stand-blog
 
           <div class="row d-flex justify-content-center">
             <div class="col-lg-8">
-            <h1 class="fw-bold mb-5">¡Bienvenido profesor!</h1>
-            <h2>Por favor ingresa tu matricula y equipo(s) para renovar</h2>
-            <h6>Recuerda que tienes derecho a 2 renovaciones por dia.</h6>
+              <h1 class="fw-bold mb-5">¡Bienvenido profesor!</h1>
+              <h2>Por favor ingresa tu matricula y equipo(s) para renovar</h2>
+              <h6>Recuerda que tienes derecho a 2 renovaciones por dia.</h6>
               <!-- 2 column grid layout with text inputs for the first and last names -->
+              <br>
               <form action="{{route('mostrar')}}" method="GET">
                 <div class="row">
                   <div class="col-md-8 mb-4">
@@ -101,82 +102,11 @@ https://templatemo.com/tm-551-stand-blog
                   </div>
                 </div>
               </form>
-
-              <!-- Equipos -->
-              <h2>Duración de renovacion</h2>
-              <br>Por favor elija las horas que quiera que dure su renovacion</br>
-
-                          <div class="form-check">
-              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-              <label class="form-check-label" for="flexRadioDefault1">
-                2 horas
-              </label>
-            </div>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-              <label class="form-check-label" for="flexRadioDefault2">
-                3 horas
-              </label>
-            </div>
-
-              <!-- Boton de Renovación -->
-              <button onclick="registrarse()" type="submit" class="btn btn-primary btn-block mb-4" id="registro" style="padding: 1.000rem 0.75rem;">
-                  Renovación
-              </button>
-
             </div>
           </div>
         </div>
       </div>
     </section>
-
-    <!-- Modal -->
-    <div class="modal fade" id="modalAgregar" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalToggleLabel">Tus equipos son:</h5>
-            {{-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> --}}
-            <span style="cursor: pointer" class="material-symbols-outlined" data-dismiss="modal">close</span>
-          </div>
-          <div class="modal-body">
-            <div class="col-md-8 mb-4">
-              {{-- <div class="form-outline">
-                @foreach ($data as $item)
-                <p>{{$item->title}}</p>
-                @endforeach
-              </div> --}}
-            </div>
-            <div class="col-md-4 mb-4">
-              <div class="form-outline">
-                <button type="submit" class="btn btn-primary btn-block mb-4" id="form-equipo" data-dismiss="modal">Aceptar</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Termina Modal -->
-
-    <!-- Segundo Modal -->
-    <div class="modal fade" id="modalEquipo" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalToggleLabel">Elige tus equipos:</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            Show a second modal and hide this one with the button below.
-          </div>
-          <div class="modal-footer">
-            <button class="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">Ok</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Termina Segundo Modal -->
 
     <footer>
         <div class="container">
@@ -214,7 +144,7 @@ https://templatemo.com/tm-551-stand-blog
     //Validar campos nulos
     $('#form-matricula').click(function () {
       if ($('#matricula').val() == "") {
-        console.log("Entro en la Alerta");
+        // console.log("Entro en la Alerta");
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
