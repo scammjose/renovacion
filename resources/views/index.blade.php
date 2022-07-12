@@ -144,7 +144,7 @@ https://templatemo.com/tm-551-stand-blog
     //Validar campos nulos
     $('#form-matricula').click(function () {
       if ($('#matricula').val() == "") {
-        // console.log("Entro en la Alerta");
+        console.log("Entro en la Alerta");
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
@@ -152,40 +152,40 @@ https://templatemo.com/tm-551-stand-blog
         });
         return false;
       }
-      // else{
-      //   $.ajax({
-      //     url: "{{ route('busqueda') }}",
-      //     type: "POST",
-      //     data: {
-      //       _token: "{{ csrf_token() }}",
-      //       matricula: $('#matricula').val(),
-      //     },
-      //     success: function(data){
-      //       //console.log(data);
-      //       var data = JSON.parse(data);
-      //       if(data == "False"){
-      //         Swal.fire({
-      //           icon: 'error',
-      //           type: 'error',
-      //           title: 'Oops...',
-      //           text: 'La matricula no fue encontrada',
-      //         }).then((result) => {
-      //           if (result.value) {
-      //             document.getElementById("form-submit").disabled = false;
-      //           }
-      //         })
-      //       }
-      //       else{
-      //         //$('#modalAgregar').modal('show');
-      //         console.log(data);
-      //         var matricula=$('#matricula').val();
-      //         console.log(matricula);
-      //         window.location.href="{{ route('mostrar',"matricula") }}";
-      //       }
-      //     }
-      //   });
-      // }
+      else{
+        console.log("Entro en el Else");
+        $.ajax({
+          url: "{{ route('busqueda') }}",
+          type: "POST",
+          data: {
+            _token: "{{ csrf_token() }}",
+            matricula: $('#matricula').val(),
+          },
+          success: function(data){
+            console.log(data);
+            var data = JSON.parse(data);
+            if(data == "False"){
+              cosole.log('Matricula no encontrada');
+              Swal.fire({
+                icon: 'error',
+                type: 'error',
+                title: 'Oops...',
+                text: 'La matricula no fue encontrada',
+              }).then((result) => {
+                if (result.value) {
+                  document.getElementById("form-submit").disabled = false;
+                }
+              })
+            }
+            else if(data == "True"){
+              cosole.log('Matricula encontrada');
+              window.location.href="{{route('mostrar')}}";
+            }
+          }
+        });
+      }
     });
+
 
     </script>
 

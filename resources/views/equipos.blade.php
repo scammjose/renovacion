@@ -75,22 +75,16 @@ https://templatemo.com/tm-551-stand-blog
               <h2>Duración de renovacion</h2>
               <br>Por favor elija las horas que quiera que dure su renovacion</br>
 
-                          <div class="form-check">
-              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-              <label class="form-check-label" for="flexRadioDefault1">
-                2 horas
-              </label>
+            <div class="form-check">
+              <input class="form-check-input" value="2" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+              <label class="form-check-label" for="flexRadioDefault1">2 horas</label>
             </div>
             <div class="form-check">
-              <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+              <input class="form-check-input" value="3" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
               <label class="form-check-label" for="flexRadioDefault2">3 horas</label>
             </div>
               <!-- Boton de Renovación -->
-              @if($data->status=1)
-              <button onclick="registrarse()" type="submit" class="btn btn-primary btn-block mb-4" id="registro" style="padding: 1.000rem 0.75rem;">Renovación</button>
-              @else
-              <button onclick="registrarse()" type="submit" class="btn btn-primary btn-block mb-4" id="registro" style="padding: 1.000rem 0.75rem;" disabled>Renovación</button>
-              @endif
+              <button type="submit" class="btn btn-primary btn-block mb-4" id="insertdata" style="padding: 1.000rem 0.75rem;">Renovación</button>
             </div>
           </div>
         </div>
@@ -102,22 +96,17 @@ https://templatemo.com/tm-551-stand-blog
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
-            @if($data->status=1)
             <h5 class="modal-title" id="exampleModalToggleLabel">Tus equipos son:</h5>
             {{-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> --}}
             <span style="cursor: pointer" class="material-symbols-outlined" data-dismiss="modal">close</span>
-            @else
-            <h5 class="modal-title" id="exampleModalToggleLabel">No tienes equipos</h5>
-            {{-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> --}}
-            <span style="cursor: pointer" class="material-symbols-outlined" data-dismiss="modal">close</span>
-            @endif
           </div>
           <div class="modal-body">
             <div class="col-md-8 mb-4">
               <div class="form-outline">
-                @foreach ($data as $item)
-                <p>{{$item->title}}</p>
-                @endforeach
+                  @forelse ($data as $item)
+                  <p>{{$item->title}}</p>
+                  @empty <p>No tienes equipos disponibles</p>
+                  @endforelse
               </div>
             </div>
             <div class="col-md-4 mb-4">
@@ -156,3 +145,19 @@ https://templatemo.com/tm-551-stand-blog
       $('#modalAgregar').modal('toggle')
     });
     </script>
+   
+   <script>
+    $('#insertdata').click(function () {
+      $.ajax({
+        url: "{{ route('renovar') }}",
+        type: "POST",
+        data: {
+          _token: "{{ csrf_token() }}",
+          matricula: $('#matricula').val(),
+        },
+        success: function(data){
+          
+        }
+      });
+    });
+   </script>
