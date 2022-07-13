@@ -23,6 +23,7 @@ class PrestamoController extends Controller
             }
         }
         if($N==1){
+            // return redirect()->route('mostrar',$request->matricula);
             return json_encode("True");
         }
         else{
@@ -30,26 +31,20 @@ class PrestamoController extends Controller
         }
     }
 
-    // public function show()
-    // {
-    //     $matricula=$_GET['matricula'];
-    //     $data=Borrow::select('borrow.MATRICULA','books.id','books.title','borrow.status')
-    //                     ->join('books','borrow.book_id','=','books.id')
-    //                     ->where("borrow.MATRICULA",'=',$matricula)
-    //                     ->where("borrow.status",'=',1)
-    //                     ->get();
-    //     return view('equipos',compact('data'));
-    // }
-
-    public function mostrar(Request $request)
+    public function mostrar($matricula)
     {
         //
-        $matricula=$_GET['matricula'];
+        // $matricula=$_GET['equipos'];
         $data=Borrow::select('borrow.MATRICULA','books.id','books.title','borrow.status')
                         ->join('books','borrow.book_id','=','books.id')
                         ->where("borrow.MATRICULA",'=',$matricula)
                         ->where("borrow.status",'=',1)
                         ->get();
         return view('equipos',compact('data'));
+    }
+    
+    public function renovar(Request $request){
+
+        return redirect()->route('index');
     }
 }

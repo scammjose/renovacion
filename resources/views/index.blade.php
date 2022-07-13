@@ -86,7 +86,8 @@ https://templatemo.com/tm-551-stand-blog
               <h6>Recuerda que tienes derecho a 2 renovaciones por dia.</h6>
               <!-- 2 column grid layout with text inputs for the first and last names -->
               <br>
-              <form action="{{route('mostrar')}}" method="GET">
+              {{-- <form action="{{route('busqueda')}}" method="POST">
+                @csrf --}}
                 <div class="row">
                   <div class="col-md-8 mb-4">
                     <div class="form-outline">
@@ -101,7 +102,7 @@ https://templatemo.com/tm-551-stand-blog
                     </div>
                   </div>
                 </div>
-              </form>
+              {{-- </form> --}}
             </div>
           </div>
         </div>
@@ -118,6 +119,17 @@ https://templatemo.com/tm-551-stand-blog
             </div>
         </div>
     </footer>
+
+
+    @if(session('NotFound')=='not')
+    <script>
+      Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Matricula no encontrada',
+        });
+    </script>
+    @endif
 
     <!-- Additional Scripts -->
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -140,7 +152,6 @@ https://templatemo.com/tm-551-stand-blog
     }
     </script>
     <script>
-
     //Validar campos nulos
     $('#form-matricula').click(function () {
       if ($('#matricula').val() == "") {
@@ -151,21 +162,17 @@ https://templatemo.com/tm-551-stand-blog
           text: 'El campo matricula es obligatorio',
         });
         return false;
-      }
-      else{
-        console.log("Entro en el Else");
+      }else{
         $.ajax({
           url: "{{ route('busqueda') }}",
           type: "POST",
           data: {
             _token: "{{ csrf_token() }}",
-            matricula: $('#matricula').val(),
-          },
-          success: function(data){
-            console.log(data);
+            matricula: $('#matricula').val()
+        },success:function(data){
+          console.log(data);
             var data = JSON.parse(data);
             if(data == "False"){
-              cosole.log('Matricula no encontrada');
               Swal.fire({
                 icon: 'error',
                 type: 'error',
@@ -178,11 +185,11 @@ https://templatemo.com/tm-551-stand-blog
               })
             }
             else if(data == "True"){
-              cosole.log('Matricula encontrada');
-              window.location.href="{{route('mostrar')}}";
+              var matricula=$('#matricula').val();
+              window.location.href="equipos/"+matricula;
             }
-          }
-        });
+        }
+      });
       }
     });
 

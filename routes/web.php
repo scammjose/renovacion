@@ -16,12 +16,5 @@ use App\Http\Controllers\PrestamoController;
 
 Route::get('/',[PrestamoController::class,'index'])->name('index');
 Route::post('/buscar', [PrestamoController::class, 'busqueda'])->name('busqueda');
-// Route::post('/renovacion', [PrestamoController::class, 'insertar'])->name('insertar');
-// Route::get('/equipos/matricula', [PrestamoController::class, 'show'])->name('equipos');
-// Route::get('/', function () {
-//     return view('index'); 
-// });
-// Route::get('/equipos',[PrestamoController::class,'busqueda'])->name('equipos');
-
-Route::get('/equipos', [PrestamoController::class, 'mostrar'])->name('mostrar');
-Route::post('/insertar', [PrestamoController::class, 'renovar'])->name('renovar');
+Route::get('/equipos/{matricula?}', [PrestamoController::class, 'mostrar'])->name('mostrar');
+Route::post('/renovar', [PrestamoController::class, 'renovar'])->name('renovar');
