@@ -108,10 +108,25 @@ https://templatemo.com/tm-551-stand-blog
             <div class="col-md-8 mb-4">
               <div class="form-outline">
             
-                  @forelse ($data as $item)
+                  {{-- @forelse ($data as $item)
                   <p>{{$item->title}}</p>
                   @empty <p>No tienes equipos disponibles</p>
-                  @endforelse
+                  @endforelse --}}
+                  
+                  <table>
+                    <tr>
+                      <th>Equipos</th>
+                      <th>Hora de solicitud</th>
+                      <th>Hora de entrega</th>
+                    </tr>
+                    @foreach ($data as $item)
+                    <tr>
+                      <td>{{$item->title}}</td>
+                      <td>{{$item->date_borrow}}</td>
+                      <td>{{$item->hora_entregar}}</td>
+                    </tr>
+                    @endforeach
+                  </table>
                  
               </div>
             </div>

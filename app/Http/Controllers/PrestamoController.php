@@ -35,7 +35,7 @@ class PrestamoController extends Controller
     {
         //
         // $matricula=$_GET['equipos'];
-        $data=Borrow::select('borrow.MATRICULA','books.id','books.title','borrow.status')
+        $data=Borrow::select('borrow.MATRICULA','books.id','books.title','borrow.status','borrow.date_borrow','borrow.hora_entregar')
                         ->join('books','borrow.book_id','=','books.id')
                         ->where("borrow.MATRICULA",'=',$matricula)
                         ->where("borrow.status",'=',1)
