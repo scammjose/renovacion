@@ -75,19 +75,21 @@ https://templatemo.com/tm-551-stand-blog
               <h2>Duración de renovacion</h2>
               <br>Por favor elija las horas que quiera que dure su renovacion</br>
      
-              <form action="{{route('renovar')}}" method="POST">
-                @csrf
+              {{-- <form action="{{route('renovar')}}" method="POST">
+                @csrf --}}
+                <input class="form-check-input" value="{{$matri}}" type="hidden" name="matricula" id="matricula">
                 <div class="form-check">
-                  <input class="form-check-input" value="2" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                  <input class="form-check-input" value="120" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
                   <label class="form-check-label" for="flexRadioDefault1">2 horas</label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" value="3" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                  <input class="form-check-input" value="180" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
                   <label class="form-check-label" for="flexRadioDefault2">3 horas</label>
                 </div>
                 <!-- Boton de Renovación -->
                 <button type="submit" class="btn btn-primary btn-block mb-4" id="insertdata" style="padding: 1.000rem 0.75rem;">Renovación</button>
-              </form>
+              {{-- </form> --}}
+
       
             </div>
           </div>
@@ -166,21 +168,34 @@ https://templatemo.com/tm-551-stand-blog
       $('#modalAgregar').modal('toggle')
     });
     </script>
-   
-   {{-- <script>
-      $.ajax({
-        url: "{{ route('renovar') }}",
-        type: "POST",
-        data: {
-          // _token: "{{ csrf_token() }}",
-          matricula: $('#matricula').val(),
-        },
-        success: function(data){
-          var data = JSON.parse(data);
-          console.log('success');
-        }, error: function(data) { 
-          console.log('error', data);
-        }
-      });
-    });
-   </script> --}}
+    
+    <script>
+      $('#insertdata').click(function () {
+        console.log('Envia los datos');
+        $.ajax({
+          url: "{{ route('renovar') }}",
+          type: "POST",
+          data: {
+            _token: "{{ csrf_token() }}",
+            matricula: $('#matricula').val(),
+            intervalo: $('input[name=flexRadioDefault]:checked').val()
+          },success:function(data){
+            Swal.fire({
+                icon: 'success',
+                type: 'success',
+                title: 'Listo',
+                text: 'Renovación exitosa',
+              }).then(function(){
+                window.location.href="{{route('index')}}";
+              });
+          },
+          error:function(data){
+            Swal.fire(
+              'Oops...',
+              'Algo salio mal',
+              'error'
+            )
+          }
+        })
+      })
+    </script>

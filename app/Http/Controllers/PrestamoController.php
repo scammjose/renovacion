@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Borrow;
 use App\Models\Books;
@@ -35,16 +36,24 @@ class PrestamoController extends Controller
     {
         //
         // $matricula=$_GET['equipos'];
+        $matri=$matricula;
         $data=Borrow::select('borrow.MATRICULA','books.id','books.title','borrow.status','borrow.date_borrow','borrow.hora_entregar')
                         ->join('books','borrow.book_id','=','books.id')
                         ->where("borrow.MATRICULA",'=',$matricula)
                         ->where("borrow.status",'=',1)
                         ->get();
-        return view('equipos',compact('data'));
+        return view('equipos',compact('data','matri'));
     }
     
     public function renovar(Request $request){
+        // $intervalo=$request['flexRadioDefault'];
+        // $ma=$request['matricula'];
+        // $statuscode=200;
+        // DB::select('call update_register(?,?)',array($intervalo,$ma));
+        // return redirect()->route('mostrar',$ma);
 
-        return redirect()->route('index');
+        $intervalo=$request->intervalo;
+        $ma=$request->matricula;
+        DB::select('call update_register(?,?)',array($intervalo,$ma));
     }
 }

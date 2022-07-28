@@ -120,17 +120,6 @@ https://templatemo.com/tm-551-stand-blog
         </div>
     </footer>
 
-
-    @if(session('NotFound')=='not')
-    <script>
-      Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Matricula no encontrada',
-        });
-    </script>
-    @endif
-
     <!-- Additional Scripts -->
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
