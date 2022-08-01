@@ -43,7 +43,8 @@ class PrestamoController extends Controller
                         ->where("borrow.status",'=',1)
                         ->get();
         $tiempo=DB::select('call tiempo(?)',array($matricula));
-        return view('equipos',compact('data','matri','tiempo'));
+        $tiempo2=DB::select('call tiempo2(?)',array($matricula));
+        return view('equipos',compact('data','matri','tiempo','tiempo2'));
     }
     
     public function renovar(Request $request){

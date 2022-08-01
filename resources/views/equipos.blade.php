@@ -90,11 +90,16 @@ https://templatemo.com/tm-551-stand-blog
                 <button type="submit" class="btn btn-danger mb-4" onclick="regresar()" id="regresar" style="padding: 1.000rem 0.75rem;">Cancelar</button>
                 {{-- Verificar que solo renueve 15 min antes de la hora establecida --}}
                 @foreach ($tiempo as $i)
-                  @if($i->tiempo==1)
-                  <button type="submit" class="btn btn-primary mb-4" id="insertdata" style="padding: 1.000rem 0.75rem;">Renovar</button>
-                  @else
-                  <button type="submit" class="btn btn-primary mb-4" id="insertdata" disabled style="padding: 1.000rem 0.75rem;">Renovar</button>
-                  @endif
+                  @foreach ($tiempo2 as $j)
+                    @if($i->tiempo==1 and $j->tiempo==1)
+                    <button type="submit" class="btn btn-primary mb-4" id="insertdata" style="padding: 1.000rem 0.75rem;">Renovar</button>
+                    @else
+                    <button type="submit" class="btn btn-primary mb-4" disabled style="padding: 1.000rem 0.75rem;">Renovar</button>
+                      @if($j->tiempo==0)
+                        <h3 style="color: crimson">El tiempo de renovación ha expirado</h3>
+                      @endif
+                    @endif
+                  @endforeach
                 @endforeach
             </div>
           </div>
