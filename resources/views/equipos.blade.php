@@ -21,7 +21,6 @@
     <link rel="stylesheet" href="assets/css/templatemo-stand-blog.css">
     <link rel="stylesheet" href="assets/css/owl.css">
 
-
 <!--
 
 TemplateMo 551 Stand Blog
@@ -85,9 +84,18 @@ https://templatemo.com/tm-551-stand-blog
                   <input class="form-check-input" value="180" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
                   <label class="form-check-label" for="flexRadioDefault2">3 horas</label>
                 </div>
+                <br>
                 <!-- Boton de Renovación -->
-                <button type="submit" class="btn btn-primary btn-block mb-4" id="insertdata" style="padding: 1.000rem 0.75rem;">Renovación</button>
-
+                <button type="submit" class="btn btn-success mb-4" onclick="ver()" id="ver_equipos" style="padding: 1.000rem 0.75rem;">Ver equipos</button>
+                <button type="submit" class="btn btn-danger mb-4" onclick="regresar()" id="regresar" style="padding: 1.000rem 0.75rem;">Cancelar</button>
+                {{-- Verificar que solo renueve 15 min antes de la hora establecida --}}
+                @foreach ($tiempo as $i)
+                  @if($i->tiempo==1)
+                  <button type="submit" class="btn btn-primary mb-4" id="insertdata" style="padding: 1.000rem 0.75rem;">Renovar</button>
+                  @else
+                  <button type="submit" class="btn btn-primary mb-4" id="insertdata" disabled style="padding: 1.000rem 0.75rem;">Renovar</button>
+                  @endif
+                @endforeach
             </div>
           </div>
         </div>
@@ -96,22 +104,24 @@ https://templatemo.com/tm-551-stand-blog
 
     <!-- Modal -->
     <div class="modal fade" id="modalAgregar" aria-hidden="" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-      <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalToggleLabel">Tus equipos son:</h5>
             <span style="cursor: pointer" class="material-symbols-outlined" data-dismiss="modal">close</span>
           </div>
           <div class="modal-body">
-            <div class="col-md-8 mb-4">
-              <div class="form-outline">
-                  
-                  <table>
+            <div >
+              <div class="form-outline"> 
+                <table class="table table-striped table-bordered" >
+                  <thead>
                     <tr>
                       <th>Equipos</th>
                       <th>Hora de solicitud</th>
                       <th>Hora de entrega</th>
                     </tr>
+                  </thead>
+                  <tbody>
                     @foreach ($data as $item)
                     <tr>
                       <td>{{$item->title}}</td>
@@ -119,8 +129,8 @@ https://templatemo.com/tm-551-stand-blog
                       <td>{{$item->hora_entregar}}</td>
                     </tr>
                     @endforeach
-                  </table>
-                 
+                  </tbody>
+                </table>
               </div>
             </div>
             <div class="col-md-4 mb-4">
@@ -155,9 +165,18 @@ https://templatemo.com/tm-551-stand-blog
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
-    $( document ).ready(function() {
-      $('#modalAgregar').modal('toggle')
-    });
+          $( document ).ready(function() {
+          $('#modalAgregar').modal('toggle')
+        });
+      function ver(){
+        $( document ).ready(function() {
+          $('#modalAgregar').modal('toggle')
+        });
+      }
+
+      function regresar(){
+        window.location.href="{{route('index')}}";
+      }
     </script>
     
     <script>
