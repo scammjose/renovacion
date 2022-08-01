@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="assets/css/templatemo-stand-blog.css">
     <link rel="stylesheet" href="assets/css/owl.css">
 
+
 <!--
 
 TemplateMo 551 Stand Blog
@@ -75,8 +76,6 @@ https://templatemo.com/tm-551-stand-blog
               <h2>Duración de renovacion</h2>
               <br>Por favor elija las horas que quiera que dure su renovacion</br>
      
-              {{-- <form action="{{route('renovar')}}" method="POST">
-                @csrf --}}
                 <input class="form-check-input" value="{{$matri}}" type="hidden" name="matricula" id="matricula">
                 <div class="form-check">
                   <input class="form-check-input" value="120" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
@@ -88,9 +87,7 @@ https://templatemo.com/tm-551-stand-blog
                 </div>
                 <!-- Boton de Renovación -->
                 <button type="submit" class="btn btn-primary btn-block mb-4" id="insertdata" style="padding: 1.000rem 0.75rem;">Renovación</button>
-              {{-- </form> --}}
 
-      
             </div>
           </div>
         </div>
@@ -103,17 +100,11 @@ https://templatemo.com/tm-551-stand-blog
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalToggleLabel">Tus equipos son:</h5>
-            {{-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> --}}
             <span style="cursor: pointer" class="material-symbols-outlined" data-dismiss="modal">close</span>
           </div>
           <div class="modal-body">
             <div class="col-md-8 mb-4">
               <div class="form-outline">
-            
-                  {{-- @forelse ($data as $item)
-                  <p>{{$item->title}}</p>
-                  @empty <p>No tienes equipos disponibles</p>
-                  @endforelse --}}
                   
                   <table>
                     <tr>
